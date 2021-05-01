@@ -21,8 +21,8 @@ public:
 	void print()
 	{
 		std::cout << "Payer: " << m_payerID << '\t'
-				  << "Recipient: " << m_recipientID << '\t'
-				  << "Amount: " << m_amount << '\n';
+			<< "Recipient: " << m_recipientID << '\t'
+			<< "Amount: " << m_amount << '\n';
 
 		if (m_comment != "")
 			std::cout << "\tComment: " << m_comment << '\n';
