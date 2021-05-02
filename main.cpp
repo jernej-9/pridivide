@@ -133,12 +133,46 @@ private:
 	std::vector<Transaction> m_transactions;
 };
 
+void printListOfCommands()
+{
+	std::cout <<
+		"a\tAdd a transaction to the ledger\n"
+		"c\tPrint a list of accepted commands\n"
+		"p\tPrint all transactions in the ledger\n"
+		"q\tQuit program\n";
+}
+
 int main()
 {
 	Ledger ledger;
-	ledger.addTransaction("Robert", "Diana", 33.28, "For pizza");
-	ledger.getTransactionFromUser();
-	ledger.printTransactions();
+	// ledger.addTransaction("Robert", "Diana", 33.28, "For pizza");
+	// ledger.printTransactions();
+
+	std::cout <<
+		"pridivide version 0.0\n"
+		"Type 'c' for a list of commands\n";
+	while (true)
+	{
+		// Print prompt
+		std::cout << "(pridivide) ";
+		char input { '\0' };
+		std::cin >> input;
+
+		switch (input)
+		{
+			case 'a':
+				ledger.getTransactionFromUser();
+				break;
+			case 'c':
+				printListOfCommands();
+				break;
+			case 'p':
+				ledger.printTransactions();
+				break;
+			case 'q':
+				return 0;
+		}
+	}
 
 	return 0;
 }
