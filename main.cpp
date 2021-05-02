@@ -57,6 +57,42 @@ public:
 		);
 	}
 
+	void getTransactionFromUser()
+	{
+		std::cout << "Name of payer: ";
+		std::string payerName { "" };
+		std::cin >> payerName;
+
+		std::cout << "Name of recipient: ";
+		std::string recipientName { "" };
+		std::cin >> recipientName;
+
+		if (payerName == recipientName)
+		{
+			std::cout <<
+				"Payer and recipient should not be the same. Try again.\n";
+			return;
+		}
+
+		std::cout << "Amount: ";
+		double amount { 0.0 };
+		std::cin >> amount;
+
+		if (amount <= 0.0)
+		{
+			std::cout << "Amount should be positive. Try again.\n";
+			return;
+		}
+
+		std::cout << "Comment: ";
+		std::string comment { "" };
+		// Clear buffer up to and including a \n
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::getline(std::cin, comment);
+
+		addTransaction(payerName, recipientName, amount, comment);
+	}
+
 	void printTransactions()
 	{
 		for (Transaction trans : m_transactions)
@@ -100,7 +136,8 @@ private:
 int main()
 {
 	Ledger ledger;
-	ledger.addTransaction("Robert", "Mike", 33.28, "For pizza");
+	ledger.addTransaction("Robert", "Diana", 33.28, "For pizza");
+	ledger.getTransactionFromUser();
 	ledger.printTransactions();
 
 	return 0;
