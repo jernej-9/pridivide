@@ -7,7 +7,8 @@ class Transaction
 {
 public:
 	Transaction(
-		int payerID, int recipientID, double amount, std::string comment = ""
+		unsigned int payerID, unsigned int recipientID,
+		double amount, std::string comment = ""
 	)
 		: m_payerID { payerID }, m_recipientID { recipientID },
 		  m_amount { amount }, m_comment { comment }
@@ -30,8 +31,8 @@ public:
 			std::cout << "\tComment: " << m_comment << '\n';
 	}
 
-	const int m_payerID;
-	const int m_recipientID;
+	const unsigned int m_payerID;
+	const unsigned int m_recipientID;
 	const double m_amount;
 
 private:
@@ -115,7 +116,7 @@ public:
 	// settle()
 
 private:
-	int getID(std::string name)
+	unsigned int getID(std::string name)
 	{
 		// Check if name is already in m_names
 		auto found { std::find(m_names.begin(), m_names.end(), name) };
