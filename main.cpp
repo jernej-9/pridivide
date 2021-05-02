@@ -99,7 +99,19 @@ public:
 			trans.print();
 	}
 
-	// calculateBalances()
+	std::vector<double> calculateBalances()
+	{
+		std::vector<double> balance(m_names.size());
+
+		for (Transaction trans : m_transactions)
+		{
+			balance[trans.m_payerID] += trans.m_amount;
+			balance[trans.m_recipientID] -= trans.m_amount;
+		}
+
+		return balance;
+	}
+
 	// settle()
 
 private:
@@ -145,8 +157,14 @@ void printListOfCommands()
 int main()
 {
 	Ledger ledger;
-	// ledger.addTransaction("Robert", "Diana", 33.28, "For pizza");
+
+	// ledger.addTransaction("Alice", "Bob", 12.4, "For ticket");
+	// ledger.addTransaction("Charlie", "Alice", 33.28, "For pizza");
 	// ledger.printTransactions();
+	// std::vector<double> balance { ledger.calculateBalances() };
+	//
+	// for (auto value : balance)
+	// 	std::cout << value << '\n';
 
 	std::cout <<
 		"pridivide version 0.0\n"
