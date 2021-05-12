@@ -113,7 +113,66 @@ public:
 		return balance;
 	}
 
-	// settle()
+	std::vector<Transaction> settle()
+	{
+		std::vector<double> balance { calculateBalances() };
+
+		std::vector<Transaction> inverseTransactions { };
+
+		// With this algorithm, the maximum number of transactions required to
+		// settle is m_names.size() -1
+		for (unsigned int i = 0; i < m_names.size() - 1; ++i)
+		{
+			auto maxBalance {
+				std::max_element(balance.begin(), balance.end())
+			};
+			// If all balances are settled already, we can end the loop
+			if (*maxBalance < 1e-3)
+			{
+				std::cout << "settle(): Fewer transactions needed\n";
+				break;
+			}
+
+			auto minBalance {
+				std::min_element(balance.begin(), balance.end())
+			};
+
+			if (*maxBalance > std::abs(*minBalance))
+			{
+				inverseTransactions.push_back(
+					Transaction{
+						static_cast<unsigned int>(maxBalance - balance.begin()),
+						static_cast<unsigned int>(minBalance - balance.begin()),
+						std::abs(*minBalance)
+					}
+				);
+
+				*maxBalance -= std::abs(*minBalance);
+				*minBalance = 0.0;
+			}
+			else
+			{
+				inverseTransactions.push_back(
+					Transaction{
+						static_cast<unsigned int>(maxBalance - balance.begin()),
+						static_cast<unsigned int>(minBalance - balance.begin()),
+						*maxBalance
+					}
+				);
+
+				*minBalance += *maxBalance;
+				*maxBalance = 0.0;
+			}
+		}
+
+		for (Transaction trans : inverseTransactions)
+		{
+			trans.print();
+			std::cout << '\n';
+		}
+
+		return inverseTransactions;
+	}
 
 private:
 	unsigned int getID(std::string name)
@@ -152,7 +211,8 @@ void printListOfCommands()
 		"a\tAdd a transaction to the ledger\n"
 		"c\tPrint a list of accepted commands\n"
 		"p\tPrint all transactions in the ledger\n"
-		"q\tQuit program\n";
+		"q\tQuit program\n"
+		"s\tSettle the current balances\n";
 }
 
 int main()
@@ -161,11 +221,16 @@ int main()
 
 	// ledger.addTransaction("Alice", "Bob", 12.4, "For ticket");
 	// ledger.addTransaction("Charlie", "Alice", 33.28, "For pizza");
-	// ledger.printTransactions();
-	// std::vector<double> balance { ledger.calculateBalances() };
-	//
-	// for (auto value : balance)
-	// 	std::cout << value << '\n';
+	// ledger.addTransaction("Diana", "Charlie", 15.6, "");
+	// ledger.addTransaction("Bob", "Charlie", 8.55, "");
+	// ledger.addTransaction("Alice", "Diana", 21.63, "");
+	// ledger.addTransaction("Charlie", "Bob", 27.11, "");
+	// ledger.addTransaction("Diana", "Charlie", 16.84, "");
+	// ledger.addTransaction("Alice", "Emilia", 5.42, "");
+	// ledger.addTransaction("Diana", "Emilia", 10.67, "");
+	// ledger.addTransaction("Emilia", "Charlie", 22.58, "");
+	// // ledger.printTransactions();
+	// ledger.settle();
 
 	std::cout <<
 		"pridivide version 0.0\n"
@@ -190,6 +255,9 @@ int main()
 				break;
 			case 'q':
 				return 0;
+			case 's':
+				ledger.settle();
+				break;
 		}
 	}
 
