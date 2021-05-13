@@ -96,6 +96,12 @@ public:
 
 	void printTransactions()
 	{
+		if (m_transactions.size() == 0)
+		{
+			std::cout << "No transactions\n";
+			return;
+		}
+
 		for (Transaction trans : m_transactions)
 			trans.print();
 	}
