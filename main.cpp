@@ -121,6 +121,12 @@ public:
 
 	std::vector<Transaction> settle()
 	{
+		if (m_names.size() == 0)
+		{
+			std::cout << "Nothing to settle\n";
+			return std::vector<Transaction>{ };
+		}
+
 		std::vector<double> balance { calculateBalances() };
 
 		std::vector<Transaction> inverseTransactions { };
