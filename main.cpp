@@ -189,16 +189,12 @@ private:
 		// If it is, the person already has an ID
 		if (found != m_names.end())
 		{
-			std::cout << "Name already exists\n";
-
 			// Return index of the name in m_names
 			return found - m_names.begin();
 		}
 		// If it is not, add the name to m_names and return new ID
 		else
 		{
-			std::cout << "New name\n";
-
 			m_names.push_back(name);
 			// New ID is the index of last element
 			return m_names.size() - 1;
