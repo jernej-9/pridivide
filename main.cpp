@@ -240,7 +240,7 @@ int main()
 	while (true)
 	{
 		// Print prompt
-		std::cout << "(pridivide) ";
+		std::cout << "\033[92m(pridivide)\033[0m ";
 		char input { '\0' };
 		std::cin >> input;
 
