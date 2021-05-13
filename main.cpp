@@ -253,10 +253,12 @@ int main()
 	{
 		// Print prompt
 		std::cout << "\033[92m(pridivide)\033[0m ";
-		char input { 0 };
-		std::cin >> input;
+		std::string input { };
+		std::getline(std::cin, input);
 
-		switch (input)
+		char command { input[0] };
+
+		switch (command)
 		{
 			case 'a':
 				ledger.getTransactionFromUser();
