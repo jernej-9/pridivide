@@ -172,10 +172,7 @@ public:
 		}
 
 		for (Transaction trans : inverseTransactions)
-		{
 			trans.print(m_names);
-			std::cout << '\n';
-		}
 
 		return inverseTransactions;
 	}
