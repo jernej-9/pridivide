@@ -21,10 +21,10 @@ public:
 		}
 	}
 
-	void print()
+	void print(const std::vector<std::string>& names)
 	{
-		std::cout << "Payer: " << m_payerID << '\t'
-			<< "Recipient: " << m_recipientID << '\t'
+		std::cout << "Payer: " << names[m_payerID] << '\t'
+			<< "Recipient: " << names[m_recipientID] << '\t'
 			<< "Amount: " << m_amount << '\n';
 
 		if (m_comment != "")
@@ -103,7 +103,7 @@ public:
 		}
 
 		for (Transaction trans : m_transactions)
-			trans.print();
+			trans.print(m_names);
 	}
 
 	std::vector<double> calculateBalances()
@@ -173,7 +173,7 @@ public:
 
 		for (Transaction trans : inverseTransactions)
 		{
-			trans.print();
+			trans.print(m_names);
 			std::cout << '\n';
 		}
 
