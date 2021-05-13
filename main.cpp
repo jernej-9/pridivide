@@ -79,6 +79,17 @@ public:
 		double amount { 0.0 };
 		std::cin >> amount;
 
+		// Check if extraction succeded
+		if (std::cin.fail())
+		{
+			std::cout << "Invalid input\n";
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			return;
+		}
+		// Clear buffer up to and including a \n
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
 		if (amount <= 0.0)
 		{
 			std::cout << "Amount should be positive. Try again.\n";
@@ -87,8 +98,6 @@ public:
 
 		std::cout << "Comment: ";
 		std::string comment { "" };
-		// Clear buffer up to and including a \n
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::getline(std::cin, comment);
 
 		addTransaction(payerName, recipientName, amount, comment);
