@@ -267,7 +267,7 @@ void printListOfCommands()
 		"s\tSettle the current balances\n";
 }
 
-int main()
+int main(const int argc, const char* const argv[])
 {
 	Ledger ledger;
 
@@ -287,6 +287,14 @@ int main()
 	std::cout <<
 		"pridivide version 0.0\n"
 		"Type 'c' for a list of commands\n";
+
+	// If a file name has been provided as an argument, import the transactions
+	if (argc >= 2)
+	{
+		std::cout << "\nImporting transactions from file ...\n";
+		ledger.importFromFile(argv[1]);
+	}
+
 	while (true)
 	{
 		// Print prompt
