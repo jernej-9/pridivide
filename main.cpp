@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <fstream>
+#include <sstream>
 
 class Transaction
 {
@@ -190,6 +192,42 @@ public:
 			trans.print(m_names);
 
 		return inverseTransactions;
+	}
+
+	void importFromFile(const std::string fileName)
+	{
+		std::ifstream fin { fileName };
+		if (!fin.is_open())
+		{
+			std::cout << "Error: Could not open file\n";
+			return;
+		}
+
+		int transactionsAdded { 0 };
+
+		while (!fin.eof())
+		{
+			std::string line { };
+			std::getline(fin >> std::ws, line);
+			if (line == "" || line[0] == '#')
+				continue;
+
+			std::stringstream ss { line };
+
+			std::string payer { };
+			std::string recipient { };
+			double amount { 0.0 };
+			std::string comment { };
+
+			ss >> payer >> recipient >> amount;
+			std::getline(ss >> std::ws, comment);
+
+			addTransaction(payer, recipient, amount, comment);
+			++transactionsAdded;
+		}
+
+		std::cout << transactionsAdded << " transactions added to ledger\n";
+		return;
 	}
 
 private:
