@@ -271,19 +271,6 @@ int main(const int argc, const char* const argv[])
 {
 	Ledger ledger;
 
-	// ledger.addTransaction("Alice", "Bob", 12.4, "For ticket");
-	// ledger.addTransaction("Charlie", "Alice", 33.28, "For pizza");
-	// ledger.addTransaction("Diana", "Charlie", 15.6, "");
-	// ledger.addTransaction("Bob", "Charlie", 8.55, "");
-	// ledger.addTransaction("Alice", "Diana", 21.63, "");
-	// ledger.addTransaction("Charlie", "Bob", 27.11, "");
-	// ledger.addTransaction("Diana", "Charlie", 16.84, "");
-	// ledger.addTransaction("Alice", "Emilia", 5.42, "");
-	// ledger.addTransaction("Diana", "Emilia", 10.67, "");
-	// ledger.addTransaction("Emilia", "Charlie", 22.58, "");
-	// // ledger.printTransactions();
-	// ledger.settle();
-
 	std::cout <<
 		"pridivide version 0.0\n"
 		"Type 'c' for a list of commands\n";
