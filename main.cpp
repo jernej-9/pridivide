@@ -36,8 +36,6 @@ public:
 	const unsigned int m_payerID;
 	const unsigned int m_recipientID;
 	const double m_amount;
-
-private:
 	const std::string m_comment;
 };
 
@@ -230,6 +228,30 @@ public:
 		return;
 	}
 
+	void saveToFile(const std::string fileName = "pridivide.ledger")
+	{
+		if (m_transactions.size() == 0)
+		{
+			std::cout << "Ledger is empty. Nothing to save\n";
+			return;
+		}
+
+		std::ofstream fout { fileName };
+
+		for (Transaction tran : m_transactions)
+		{
+			fout <<
+				m_names[tran.m_payerID] << '\t' <<
+				m_names[tran.m_recipientID] << '\t' <<
+				tran.m_amount << '\t' <<
+				tran.m_comment << '\n';
+		}
+
+		std::cout << "Ledger saved to file " << fileName << '\n';
+
+		return;
+	}
+
 private:
 	unsigned int getID(std::string name)
 	{
@@ -264,7 +286,8 @@ void printListOfCommands()
 		"c\tPrint a list of accepted commands\n"
 		"p\tPrint all transactions in the ledger\n"
 		"q\tQuit program\n"
-		"s\tSettle the current balances\n";
+		"s\tSettle the current balances\n"
+		"v\tSave the ledger to a file\n";
 }
 
 int main(const int argc, const char* const argv[])
@@ -306,6 +329,9 @@ int main(const int argc, const char* const argv[])
 				return 0;
 			case 's':
 				ledger.settle();
+				break;
+			case 'v':
+				ledger.saveToFile();
 				break;
 		}
 	}
