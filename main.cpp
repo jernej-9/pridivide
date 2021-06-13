@@ -131,7 +131,7 @@ public:
 
 	std::vector<Transaction> settle()
 	{
-		if (m_names.size() == 0)
+		if (m_transactions.size() == 0)
 		{
 			std::cout << "Nothing to settle\n";
 			return std::vector<Transaction>{ };
