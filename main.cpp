@@ -306,7 +306,7 @@ int main(const int argc, const char* const argv[])
 		ledger.importFromFile(argv[1]);
 	}
 
-	while (true)
+	while (!std::cin.eof())
 	{
 		// Print prompt
 		std::cout << "\033[92m(pridivide)\033[0m ";
