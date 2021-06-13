@@ -62,11 +62,11 @@ public:
 	{
 		std::cout << "Name of payer: ";
 		std::string payerName { "" };
-		std::cin >> payerName;
+		std::getline(std::cin, payerName);
 
 		std::cout << "Name of recipient: ";
 		std::string recipientName { "" };
-		std::cin >> recipientName;
+		std::getline(std::cin, recipientName);
 
 		if (payerName == recipientName)
 		{
