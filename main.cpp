@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <fstream>
 #include <sstream>
+#include <iomanip>
 
 class Transaction
 {
@@ -217,8 +218,8 @@ public:
 			double amount { 0.0 };
 			std::string comment { };
 
-			ss >> payer >> recipient >> amount;
-			std::getline(ss >> std::ws, comment);
+			ss >> std::quoted(payer) >> std::quoted(recipient) >> amount
+				>> std::quoted(comment);
 
 			addTransaction(payer, recipient, amount, comment);
 			++transactionsAdded;
@@ -241,10 +242,10 @@ public:
 		for (Transaction tran : m_transactions)
 		{
 			fout <<
-				m_names[tran.m_payerID] << '\t' <<
-				m_names[tran.m_recipientID] << '\t' <<
+				std::quoted(m_names[tran.m_payerID]) << '\t' <<
+				std::quoted(m_names[tran.m_recipientID]) << '\t' <<
 				tran.m_amount << '\t' <<
-				tran.m_comment << '\n';
+				std::quoted(tran.m_comment) << '\n';
 		}
 
 		std::cout << "Ledger saved to file " << fileName << '\n';
