@@ -142,7 +142,7 @@ public:
 		std::vector<Transaction> inverseTransactions { };
 
 		// With this algorithm, the maximum number of transactions required to
-		// settle is m_names.size() -1
+		// settle is m_names.size() - 1
 		for (unsigned int i = 0; i < m_names.size() - 1; ++i)
 		{
 			auto maxBalance {
