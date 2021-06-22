@@ -1,10 +1,10 @@
-#include <iostream>
-#include <string>
-#include <vector>
 #include <algorithm>
 #include <fstream>
-#include <sstream>
 #include <iomanip>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
 
 class Transaction
 {
