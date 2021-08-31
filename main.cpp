@@ -202,14 +202,14 @@ public:
 			return;
 		}
 
+		int lineNo { 0 };
 		int transactionsAdded { 0 };
 
 		while (!fin.eof())
 		{
 			std::string line { };
-			std::getline(fin >> std::ws, line);
-			if (line == "" || line[0] == '#')
-				continue;
+			std::getline(fin, line);
+			++lineNo;
 
 			std::stringstream ss { line };
 
@@ -218,8 +218,20 @@ public:
 			double amount { 0.0 };
 			std::string comment { };
 
-			ss >> std::quoted(payer) >> std::quoted(recipient) >> amount
-				>> std::quoted(comment);
+			ss >> std::quoted(payer);
+			// Ignore the line if it is empty or a comment
+			if (payer == "" || payer[0] == '#')
+				continue;
+
+			ss >> std::quoted(recipient) >> amount >> std::quoted(comment);
+
+			// Check if the transaction was valid
+			if (amount == 0.0)
+			{
+				std::cout << "Warning: Invalid input on line " << lineNo
+					<< ".\n";
+				continue;
+			}
 
 			addTransaction(payer, recipient, amount, comment);
 			++transactionsAdded;
