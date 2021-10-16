@@ -300,7 +300,7 @@ void printListOfCommands()
 		"p\tPrint all transactions in the ledger\n"
 		"q\tQuit program\n"
 		"s\tSettle the current balances\n"
-		"v\tSave the ledger to a file\n";
+		"w\tWrite (save) the ledger to a file\n";
 }
 
 int main(const int argc, const char* const argv[])
@@ -343,7 +343,7 @@ int main(const int argc, const char* const argv[])
 			case 's':
 				ledger.settle();
 				break;
-			case 'v':
+			case 'w':
 				ledger.saveToFile();
 				break;
 		}
