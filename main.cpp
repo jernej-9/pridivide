@@ -296,7 +296,7 @@ void printListOfCommands()
 {
 	std::cout <<
 		"a\tAdd a transaction to the ledger\n"
-		"c\tPrint a list of accepted commands\n"
+		"h\tPrint a list of accepted commands\n"
 		"p\tPrint all transactions in the ledger\n"
 		"q\tQuit program\n"
 		"s\tSettle the current balances\n"
@@ -309,7 +309,7 @@ int main(const int argc, const char* const argv[])
 
 	std::cout <<
 		"pridivide version 0.0\n"
-		"Type 'c' for a list of commands\n";
+		"Type 'h' for help\n";
 
 	// If a file name has been provided as an argument, import the transactions
 	if (argc >= 2)
@@ -332,7 +332,7 @@ int main(const int argc, const char* const argv[])
 			case 'a':
 				ledger.getTransactionFromUser();
 				break;
-			case 'c':
+			case 'h':
 				printListOfCommands();
 				break;
 			case 'p':
