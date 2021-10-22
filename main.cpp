@@ -129,12 +129,12 @@ public:
 		return balance;
 	}
 
-	std::vector<Transaction> settle()
+	void settle()
 	{
 		if (m_transactions.size() == 0)
 		{
 			std::cout << "Nothing to settle\n";
-			return std::vector<Transaction>{ };
+			return;
 		}
 
 		std::vector<double> balance { calculateBalances() };
@@ -189,8 +189,6 @@ public:
 
 		for (Transaction trans : inverseTransactions)
 			trans.print(m_names);
-
-		return inverseTransactions;
 	}
 
 	void importFromFile(const std::string fileName)
