@@ -224,7 +224,7 @@ public:
 			ss >> std::quoted(recipient) >> amount >> std::quoted(comment);
 
 			// Check if the transaction was valid
-			if (amount == 0.0)
+			if (amount == 0.0 || payer == recipient)
 			{
 				std::cout << "Warning: Invalid input on line " << lineNo
 					<< ".\n";
