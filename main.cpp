@@ -345,6 +345,9 @@ int main(const int argc, const char* const argv[])
 			case 'w':
 				ledger.saveToFile();
 				break;
+			default:
+				std::cout << "Unknown command: " << command << '\n';
+				break;
 		}
 	}
 
